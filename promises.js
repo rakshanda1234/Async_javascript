@@ -10,22 +10,24 @@ const posts = [
   },
 ];
 
-function getPost() {
+function getPosts() {
   setTimeout(() => {
     let output = " ";
-    posts.forEach((post, index) => {
-      output += `<li>${posts[i].title}</li>`;
-    });
-
-    document.body.innerHTML = output;
-  }, 1000);
+    return new Promise((resolve, reject) => {
+      posts.forEach((post) => {
+        output += `<li>${post.title}</li>`;
+      });
+      document.body.innerHTML = output;
+    }, 1000);
+    resolve();
+  });
 }
 
 function createPost(post) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       posts.push(post);
-      const error = true;
+      const error = false;
       if (!error) {
         resolve();
       } else {
@@ -34,6 +36,24 @@ function createPost(post) {
     }, 2000);
   });
 }
+
+function deletePost() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (posts.length == 0) reject(`can't pop elements from an empty array!`);
+      posts.pop();
+      resolve();
+    }, 1000);
+  });
+}
 createPost({ title: "Post 3", body: "This is post 3" })
-  .then(getPost)
+  .then(getPosts)
+  .then(deletePost)
+  .then(getPosts)
+  .then(deletePost)
+  .then(getPosts)
+  .then(deletePost)
+  .then(getPosts)
+  .then(deletePost)
+  .then(getPosts)
   .catch((err) => console.log(err));
