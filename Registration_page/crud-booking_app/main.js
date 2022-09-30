@@ -32,6 +32,21 @@ function saveToLocalStorage(event) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  axios
+    //Make a GET request to crud crud when the DOM has loaded and get the user Details which have been saved and show it on the website
+    .get(
+      "https://crudcrud.com/api/2055e0da4d854468bded6bda15f3b6c0/appointmentData"
+    )
+    .then((response) => {
+      console.log(response);
+
+      for (var i = 0; i < response.data.length; i++) {
+        showNewUserOnScreen(response.data[i]);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   const localStorageObj = localStorage;
   const localstoragekeys = Object.keys(localStorageObj);
 
