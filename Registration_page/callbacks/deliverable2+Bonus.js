@@ -8,10 +8,10 @@ function getPosts() {
     let output = "";
     posts.forEach((post) => {
       const time = Math.round((new Date().getTime() - post.created) / 1000);
-      output += `<li>${post.title}created ${time}sec ago</li>`;
+      output += `<li>${post.title} created ${time} sec ago.</li>`;
     });
     const time = lastEditedInSecondsAgo();
-    output += `<div>Last Modified:${time}sec ago!</div>`;
+    output += `<div> Last Modified : ${time} sec ago ! </div>`;
     document.body.innerHTML = output;
   }, 1000);
 }
@@ -19,13 +19,13 @@ function createPost(post) {
   posts.push(post);
 }
 
-function createPost4th(post, createPost, gerPosts) {
+function createPost4th(post, createPost, getPosts) {
   createPost(post);
   setTimeout(() => {
     getPosts();
   }, 2000);
 }
-
+//Bonus
 function lastEditedInSecondsAgo() {
   const listModifiedLast =
     new Date().getTime() - posts[posts.length - 1].created;
