@@ -18,13 +18,13 @@ function getPosts() {
 
 function createPost(post) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      posts.push(post);
+    posts.push(post);
 
+    setTimeout(() => {
       const error = false;
 
       if (!error) {
-        resolve();
+        resolve(posts);
       } else {
         reject("Error:Something went wrong!");
       }
@@ -38,17 +38,20 @@ function deletePost() {
       if (posts.length == 0) reject(`can't pop element from an empty array!`);
 
       posts.pop();
-      resolve();
+      resolve(posts);
     }, 1000);
   });
 }
-const UserActivity = { lastTime: new Date().getTime() };
 //promise All
 const promise1 = Promise.resolve("Hello World");
 const promise2 = 10;
-const promise3 = new Promise((resolve, reject) =>
-  setTimeout(resolve, 2000, "Goodbye")
-);
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("promise3");
+  }, 1000);
+});
+
+const UserActivity = { lastTime: new Date().getTime() };
 
 /*
 Promise.all([promise1, promise2, promise3]).then((values) =>
